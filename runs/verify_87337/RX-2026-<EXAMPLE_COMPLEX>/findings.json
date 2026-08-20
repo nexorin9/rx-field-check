@@ -1,0 +1,95 @@
+{
+  "prescription_no": "RX-2026-<EXAMPLE_COMPLEX>",
+  "count": 6,
+  "by_family": {
+    "indication": 1,
+    "allergy": 1,
+    "interaction": 4
+  },
+  "findings": [
+    {
+      "prescription_no": "RX-2026-<EXAMPLE_COMPLEX>",
+      "field": "items[2].drug_code",
+      "field_value": "DRUG_WAR",
+      "family": "indication",
+      "rule_id": "R-IND-NO-OVERLAP",
+      "rule_version": "v2026.08",
+      "hit_explanation": "药品 DRUG_WAR 适应症 ['I48.000', 'I80.200'] 与诊断 ['I25.200', 'M79.300'] 无交集，疑似超说明书用药",
+      "evidence": "<DRUG_DICT:DRUG_WAR.indications>",
+      "severity": "medium",
+      "source": "rule_engine",
+      "agent_id": "rx_field_indication",
+      "created_at": "2026-08-20T08:24:02+00:00"
+    },
+    {
+      "prescription_no": "RX-2026-<EXAMPLE_COMPLEX>",
+      "field": "items[0].drug_code",
+      "field_value": "DRUG_ASP",
+      "family": "allergy",
+      "rule_id": "R-ALG-A-ASP-DIRECT",
+      "rule_version": "A-ASP/DRUG_ASP/direct",
+      "hit_explanation": "过敏冲突（直接命中）：aspirin ↔ DRUG_ASP；阿司匹林过敏者其他 NSAID 须谨慎",
+      "evidence": "<ALLERGY_DB:A-ASP/DRUG_ASP/direct>",
+      "severity": "medium",
+      "source": "rule_engine",
+      "agent_id": "rx_field_allergy",
+      "created_at": "2026-08-20T08:24:02+00:00"
+    },
+    {
+      "prescription_no": "RX-2026-<EXAMPLE_COMPLEX>",
+      "field": "interactions[DRUG_ASP+DRUG_IBUP]",
+      "field_value": "DRUG_ASP+DRUG_IBUP",
+      "family": "interaction",
+      "rule_id": "R-INT-002",
+      "rule_version": "v2026.08",
+      "hit_explanation": "配伍冲突（major）：DRUG_ASP ↔ DRUG_IBUP；阿司匹林与布洛芬同用降低阿司匹林抗血小板效应，并增加胃肠出血",
+      "evidence": "<INTERACTION_DB:DRUG_ASP+DRUG_IBUP>",
+      "severity": "high",
+      "source": "rule_engine",
+      "agent_id": "rx_field_interaction",
+      "created_at": "2026-08-20T08:24:02+00:00"
+    },
+    {
+      "prescription_no": "RX-2026-<EXAMPLE_COMPLEX>",
+      "field": "interactions[DRUG_ASP+DRUG_WAR]",
+      "field_value": "DRUG_ASP+DRUG_WAR",
+      "family": "interaction",
+      "rule_id": "R-INT-001",
+      "rule_version": "v2026.08",
+      "hit_explanation": "配伍冲突（major）：DRUG_ASP ↔ DRUG_WAR；华法林联用阿司匹林显著增加出血风险；如需联用须监测 INR",
+      "evidence": "<INTERACTION_DB:DRUG_WAR+DRUG_ASP>",
+      "severity": "high",
+      "source": "rule_engine",
+      "agent_id": "rx_field_interaction",
+      "created_at": "2026-08-20T08:24:02+00:00"
+    },
+    {
+      "prescription_no": "RX-2026-<EXAMPLE_COMPLEX>",
+      "field": "interactions[DRUG_IBUP+DRUG_WAR]",
+      "field_value": "DRUG_IBUP+DRUG_WAR",
+      "family": "interaction",
+      "rule_id": "R-INT-009",
+      "rule_version": "v2026.08",
+      "hit_explanation": "配伍冲突（contraindicated）：DRUG_IBUP ↔ DRUG_WAR；NSAID 与抗凝药同用显著增加消化道出血风险；如必须联用，加 PPI 监测",
+      "evidence": "<INTERACTION_DB:DRUG_IBUP+DRUG_WAR>",
+      "severity": "high",
+      "source": "rule_engine",
+      "agent_id": "rx_field_interaction",
+      "created_at": "2026-08-20T08:24:02+00:00"
+    },
+    {
+      "prescription_no": "RX-2026-<EXAMPLE_COMPLEX>",
+      "field": "interactions[DRUG_ASP+DRUG_IBUP]",
+      "field_value": "DRUG_ASP+DRUG_IBUP",
+      "family": "interaction",
+      "rule_id": "R-INT-101",
+      "rule_version": "v2026.08",
+      "hit_explanation": "配伍冲突（contraindicated）：DRUG_ASP ↔ DRUG_IBUP；抗血小板 + NSAID + 抗凝三联显著增加出血风险，避免联用",
+      "evidence": "<INTERACTION_DB:ASP+IBUP+WAR_TRIPLE>",
+      "severity": "high",
+      "source": "rule_engine",
+      "agent_id": "rx_field_interaction",
+      "created_at": "2026-08-20T08:24:02+00:00"
+    }
+  ]
+}

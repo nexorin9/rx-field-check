@@ -1,0 +1,80 @@
+{
+  "prescription_no": "RX-2026-<EXAMPLE_OVERDOSE>",
+  "count": 5,
+  "by_family": {
+    "dose": 4,
+    "interaction": 1
+  },
+  "findings": [
+    {
+      "prescription_no": "RX-2026-<EXAMPLE_OVERDOSE>",
+      "field": "items[0].dose",
+      "field_value": "1g",
+      "family": "dose",
+      "rule_id": "R-DOSE-001-SINGLE",
+      "rule_version": "v2026.08",
+      "hit_explanation": "单次剂量 1.0g 超过上限 0.5g",
+      "evidence": "<DRUG_DICT:DRUG_AMOX.max_daily_dose_g>",
+      "severity": "high",
+      "source": "rule_engine",
+      "agent_id": "rx_field_dose",
+      "created_at": "2026-08-20T08:24:01+00:00"
+    },
+    {
+      "prescription_no": "RX-2026-<EXAMPLE_OVERDOSE>",
+      "field": "items[1].dose",
+      "field_value": "10mg",
+      "family": "dose",
+      "rule_id": "R-DOSE-004-SINGLE",
+      "rule_version": "v2026.08",
+      "hit_explanation": "单次剂量 0.01g 超过上限 0.005g",
+      "evidence": "<DRUG_DICT:DRUG_WAR.max_daily_dose_g>",
+      "severity": "high",
+      "source": "rule_engine",
+      "agent_id": "rx_field_dose",
+      "created_at": "2026-08-20T08:24:01+00:00"
+    },
+    {
+      "prescription_no": "RX-2026-<EXAMPLE_OVERDOSE>",
+      "field": "items[1].dose",
+      "field_value": "10mg",
+      "family": "dose",
+      "rule_id": "R-DOSE-004-DAILY",
+      "rule_version": "v2026.08",
+      "hit_explanation": "日剂量 0.01g 超过上限 0.0075g",
+      "evidence": "<DRUG_DICT:DRUG_WAR.max_daily_dose_g>",
+      "severity": "high",
+      "source": "rule_engine",
+      "agent_id": "rx_field_dose",
+      "created_at": "2026-08-20T08:24:01+00:00"
+    },
+    {
+      "prescription_no": "RX-2026-<EXAMPLE_OVERDOSE>",
+      "field": "items[1].dose",
+      "field_value": "10mg",
+      "family": "dose",
+      "rule_id": "R-DOSE-DICT-OVER-DAILY",
+      "rule_version": "v2026.08",
+      "hit_explanation": "单次剂量 0.01g 已超过药品字典日剂量上限 0.0075g（po）——临床必警示，立即复核",
+      "evidence": "<DRUG_DICT:DRUG_WAR.max_daily_dose_g/po>",
+      "severity": "high",
+      "source": "rule_engine",
+      "agent_id": "rx_field_dose",
+      "created_at": "2026-08-20T08:24:01+00:00"
+    },
+    {
+      "prescription_no": "RX-2026-<EXAMPLE_OVERDOSE>",
+      "field": "interactions[DRUG_AMOX+DRUG_WAR]",
+      "field_value": "DRUG_AMOX+DRUG_WAR",
+      "family": "interaction",
+      "rule_id": "R-INT-004",
+      "rule_version": "v2026.08",
+      "hit_explanation": "配伍冲突（moderate）：DRUG_AMOX ↔ DRUG_WAR；抗生素可影响华法林代谢，监测 INR",
+      "evidence": "<INTERACTION_DB:DRUG_AMOX+DRUG_WAR>",
+      "severity": "medium",
+      "source": "rule_engine",
+      "agent_id": "rx_field_interaction",
+      "created_at": "2026-08-20T08:24:01+00:00"
+    }
+  ]
+}

@@ -1,0 +1,429 @@
+/* 用药处方字段对照校验系统 — Viewer 样式
+   字段族 × 严重度 × 证据卡三层结构，配色与状态机 / spec.md 输出一致。 */
+
+:root {
+  --bg-base: #f5f7fa;
+  --bg-card: #ffffff;
+  --bg-elev: #fafbfc;
+  --bg-overlay: rgba(15, 23, 42, 0.42);
+  --text-base: #1f2937;
+  --text-muted: #6b7280;
+  --text-soft: #94a3b8;
+  --border-soft: #e2e8f0;
+  --border-strong: #cbd5e1;
+  --shadow-card: 0 1px 3px rgba(15, 23, 42, 0.07);
+  --shadow-modal: 0 12px 40px rgba(15, 23, 42, 0.18);
+
+  /* 8 字段族 + 兜底 uncovered，与 FAMILY_PREFIX 一一对应 */
+  --family-drug: #2563eb;          /* 蓝：药品识别 */
+  --family-dose: #7c3aed;          /* 紫：剂量 */
+  --family-frequency: #0891b2;     /* 青：频次 */
+  --family-route: #0d9488;         /* 蓝绿：给药途径 */
+  --family-indication: #ca8a04;    /* 黄褐：适应症 */
+  --family-allergy: #dc2626;       /* 红：过敏 */
+  --family-interaction: #ea580c;   /* 橙：配伍 */
+  --family-population: #be185d;    /* 品红：特殊人群 */
+  --family-uncovered: #a16207;     /* 暗黄：规则未覆盖 */
+
+  /* severity 4 档，与 spec.md 输出 schema 对齐 */
+  --severity-high: #dc2626;
+  --severity-medium: #ea580c;
+  --severity-low: #2563eb;
+  --severity-info: #6b7280;
+
+  --status-confirmed: #16a34a;
+  --status-overridden: #c2410c;
+  --status-written-back: #1d4ed8;
+  --status-awaiting: #2563eb;
+  --status-running: #0891b2;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: -apple-system, "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
+  background: var(--bg-base);
+  color: var(--text-base);
+  line-height: 1.55;
+  font-size: 14px;
+}
+
+/* ───────── Topbar ───────── */
+.topbar {
+  background: var(--bg-card);
+  border-bottom: 1px solid var(--border-soft);
+  padding: 12px 24px;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.topbar-title {
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+.topbar-meta { display: flex; gap: 18px; font-size: 13px; }
+.meta-item code {
+  background: #f1f5f9;
+  border: 1px solid var(--border-soft);
+  border-radius: 4px;
+  padding: 1px 6px;
+  font-family: ui-monospace, Menlo, monospace;
+  font-size: 12px;
+}
+.status-pill {
+  display: inline-block;
+  padding: 1px 10px;
+  border-radius: 999px;
+  color: #fff;
+  background: var(--severity-info);
+  font-size: 12px;
+  letter-spacing: 0.4px;
+}
+.status-pill.is-awaiting_review { background: var(--status-awaiting); }
+.status-pill.is-running { background: var(--status-running); }
+.status-pill.is-confirmed { background: var(--status-confirmed); }
+.status-pill.is-overridden { background: var(--status-overridden); }
+.status-pill.is-written_back { background: var(--status-written-back); }
+
+/* ───────── Runs bar ───────── */
+.runs-bar {
+  background: var(--bg-elev);
+  border-bottom: 1px solid var(--border-soft);
+  padding: 10px 24px;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.runs-bar label { color: var(--text-muted); }
+.runs-bar select {
+  padding: 4px 8px;
+  border: 1px solid var(--border-strong);
+  border-radius: 4px;
+  background: #fff;
+  font-size: 13px;
+  min-width: 260px;
+  max-width: 380px;
+}
+.runs-hint { color: var(--text-soft); font-size: 12px; }
+
+/* ───────── 三栏布局 ───────── */
+.layout {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 16px;
+  padding: 16px 24px 24px;
+}
+@media (max-width: 1100px) { .layout { grid-template-columns: 1fr; } }
+
+.findings-panel,
+.transcript-panel,
+.audit-panel {
+  background: var(--bg-card);
+  border: 1px solid var(--border-soft);
+  border-radius: 8px;
+  padding: 16px 18px 20px;
+  min-height: 320px;
+}
+h2 {
+  font-size: 16px;
+  margin: 0 0 4px;
+  letter-spacing: 0.4px;
+}
+h2 small { font-size: 12px; color: var(--text-muted); font-weight: 400; }
+.panel-desc { font-size: 12px; color: var(--text-muted); margin: 0 0 14px; }
+.empty-state {
+  background: #fefce8;
+  border: 1px dashed #facc15;
+  color: #854d0e;
+  padding: 14px;
+  border-radius: 6px;
+}
+
+/* ───────── 字段族 × 证据卡网格 ───────── */
+.family-grid { display: flex; flex-direction: column; gap: 12px; }
+.family-block {
+  border: 1px solid var(--border-soft);
+  border-radius: 6px;
+  overflow: hidden;
+  background: var(--bg-elev);
+}
+.family-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 14px;
+  background: var(--bg-card);
+  border-bottom: 2px solid currentColor;
+  font-weight: 600;
+  font-size: 13px;
+  color: var(--text-base);
+}
+.family-head .family-name { text-transform: uppercase; letter-spacing: 0.5px; }
+.family-head .family-count { color: var(--text-muted); font-weight: 400; }
+
+/* 8 字段族配色（与 family_color() pure 函数对齐） */
+.family-block[data-family="drug"]         .family-head { color: var(--family-drug); }
+.family-block[data-family="dose"]         .family-head { color: var(--family-dose); }
+.family-block[data-family="frequency"]    .family-head { color: var(--family-frequency); }
+.family-block[data-family="route"]        .family-head { color: var(--family-route); }
+.family-block[data-family="indication"]   .family-head { color: var(--family-indication); }
+.family-block[data-family="allergy"]      .family-head { color: var(--family-allergy); }
+.family-block[data-family="interaction"]  .family-head { color: var(--family-interaction); }
+.family-block[data-family="population"]   .family-head { color: var(--family-population); }
+.family-block[data-family="uncovered"]    .family-head { color: var(--family-uncovered); background: #fef9c3; }
+
+.family-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 10px;
+  padding: 12px;
+}
+
+/* 字段证据卡 */
+.field-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-soft);
+  border-left: 4px solid var(--text-soft);
+  border-radius: 6px;
+  padding: 10px 12px;
+  cursor: pointer;
+  box-shadow: var(--shadow-card);
+  transition: transform 0.08s, box-shadow 0.08s;
+}
+.field-card:hover { transform: translateY(-1px); box-shadow: 0 4px 10px rgba(15, 23, 42, 0.12); }
+
+.field-card .card-row { display: flex; justify-content: space-between; gap: 6px; margin-bottom: 4px; }
+.field-card .card-row code {
+  font-family: ui-monospace, Menlo, monospace;
+  font-size: 12px;
+  color: var(--text-base);
+  background: #f1f5f9;
+  padding: 1px 6px;
+  border-radius: 3px;
+}
+.field-card .card-label {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-right: 4px;
+}
+.field-card .card-value { font-size: 13px; color: var(--text-base); margin-bottom: 6px; word-break: break-all; }
+.field-card .card-evidence {
+  font-size: 12px;
+  color: var(--text-muted);
+  background: #f8fafc;
+  border-radius: 4px;
+  padding: 4px 6px;
+  margin-bottom: 4px;
+}
+.field-card .card-explanation { font-size: 12px; margin-top: 4px; }
+.field-card .card-source {
+  font-size: 11px;
+  color: var(--text-soft);
+  margin-top: 4px;
+  font-style: italic;
+}
+
+/* severity 4 档左 border 强调 */
+.field-card.severity-high   { border-left-color: var(--severity-high); }
+.field-card.severity-medium { border-left-color: var(--severity-medium); }
+.field-card.severity-low    { border-left-color: var(--severity-low); }
+.field-card.severity-info   { border-left-color: var(--severity-info); }
+
+/* 兜底：规则族未覆盖 */
+.field-card.uncovered { background: #fffbe6; border-color: #facc15; }
+.field-card.uncovered .card-evidence { background: #fef9c3; }
+
+/* 药师确认后视觉标记（CSS class 由 app.js 在 confirm 成功后追加） */
+.field-card.is-confirmed  { opacity: 0.6; }
+.field-card.is-confirmed::after {
+  content: "已确认";
+  display: inline-block;
+  margin-left: 4px;
+  font-size: 11px;
+  color: var(--status-confirmed);
+  background: #dcfce7;
+  padding: 0 6px;
+  border-radius: 4px;
+}
+.field-card.is-overridden::after {
+  content: "已放行";
+  color: var(--status-overridden);
+  background: #ffedd5;
+  margin-left: 4px;
+  font-size: 11px;
+  padding: 0 6px;
+  border-radius: 4px;
+}
+.field-card.is-rejected::after {
+  content: "已驳回";
+  color: #b91c1c;
+  background: #fee2e2;
+  margin-left: 4px;
+  font-size: 11px;
+  padding: 0 6px;
+  border-radius: 4px;
+}
+
+.severity-pill {
+  display: inline-block;
+  padding: 1px 8px;
+  border-radius: 999px;
+  color: #fff;
+  font-size: 11px;
+  letter-spacing: 0.4px;
+  background: var(--severity-info);
+}
+.severity-pill.severity-high   { background: var(--severity-high); }
+.severity-pill.severity-medium { background: var(--severity-medium); }
+.severity-pill.severity-low    { background: var(--severity-low); }
+.severity-pill.severity-info   { background: var(--severity-info); }
+
+/* ───────── Transcripts / audit 列表 ───────── */
+.transcript-list,
+.audit-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  max-height: 520px;
+  overflow-y: auto;
+}
+.transcript-list li,
+.audit-list li {
+  border-bottom: 1px dashed var(--border-soft);
+  padding: 6px 4px;
+  font-size: 12px;
+}
+.transcript-list li time,
+.audit-list li time {
+  display: block;
+  color: var(--text-soft);
+  font-size: 11px;
+}
+.transcript-list .event-pill,
+.audit-list .action-pill {
+  display: inline-block;
+  padding: 0 6px;
+  border-radius: 3px;
+  background: #e0f2fe;
+  color: #075985;
+  margin-right: 4px;
+  font-size: 11px;
+}
+.audit-list .action-pill.is-confirm       { background: #dcfce7; color: #166534; }
+.audit-list .action-pill.is-override      { background: #ffedd5; color: #9a3412; }
+.audit-list .action-pill.is-reject        { background: #fee2e2; color: #991b1b; }
+.audit-list .action-pill.is-manual_override { background: #fef9c3; color: #854d0e; }
+
+/* ───────── 模态 ───────── */
+.modal-mask {
+  position: fixed;
+  inset: 0;
+  background: var(--bg-overlay);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 50;
+  padding: 24px;
+}
+.modal {
+  background: var(--bg-card);
+  border-radius: 10px;
+  width: min(560px, 100%);
+  max-height: 90vh;
+  overflow: auto;
+  box-shadow: var(--shadow-modal);
+  display: flex;
+  flex-direction: column;
+}
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--border-soft);
+  padding: 14px 18px;
+}
+.modal-header h3 { margin: 0; font-size: 15px; }
+.modal-close {
+  border: none;
+  background: transparent;
+  font-size: 20px;
+  cursor: pointer;
+  color: var(--text-muted);
+  line-height: 1;
+}
+.modal-body { padding: 16px 18px; border-bottom: 1px solid var(--border-soft); }
+.modal-body .modal-row { margin-bottom: 8px; font-size: 13px; }
+.modal-body .modal-row .card-label { color: var(--text-muted); margin-right: 6px; }
+.modal-body .modal-row code {
+  background: #f1f5f9;
+  padding: 1px 6px;
+  border-radius: 3px;
+  font-size: 12px;
+}
+.modal-body .modal-evidence {
+  background: #f8fafc;
+  border-radius: 4px;
+  padding: 8px;
+  font-size: 12px;
+  margin-top: 4px;
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+
+.modal-form {
+  padding: 14px 18px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.modal-form label { font-size: 12px; color: var(--text-muted); }
+.modal-form input,
+.modal-form textarea {
+  font: inherit;
+  border: 1px solid var(--border-strong);
+  border-radius: 4px;
+  padding: 6px 8px;
+  resize: vertical;
+}
+.modal-actions {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+  margin-top: 8px;
+  flex-wrap: wrap;
+}
+.btn {
+  border: 1px solid transparent;
+  border-radius: 4px;
+  padding: 6px 14px;
+  font: inherit;
+  cursor: pointer;
+}
+.btn-primary   { background: var(--status-confirmed); color: #fff; }
+.btn-warning   { background: var(--severity-medium); color: #fff; }
+.btn-danger    { background: var(--severity-high); color: #fff; }
+.btn-link      { background: transparent; color: var(--text-muted); }
+.btn:disabled  { opacity: 0.5; cursor: not-allowed; }
+.modal-hint { font-size: 11px; color: var(--text-soft); margin: 6px 0 0; }
+
+/* ───────── 页脚 ───────── */
+.footer {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 24px;
+  font-size: 12px;
+  color: var(--text-soft);
+  border-top: 1px solid var(--border-soft);
+  background: var(--bg-card);
+}
+.connection-state { font-size: 16px; line-height: 1; }
+.connection-state.is-ok        { color: var(--status-confirmed); }
+.connection-state.is-stalled   { color: var(--severity-medium); }
+.connection-state.is-error     { color: var(--severity-high); }
+.connection-state.is-unauthed  { color: var(--severity-high); }

@@ -1,0 +1,23 @@
+{
+  "prescription_no": "RX-2026-<EXAMPLE_ALLERGY>",
+  "count": 1,
+  "by_family": {
+    "allergy": 1
+  },
+  "findings": [
+    {
+      "prescription_no": "RX-2026-<EXAMPLE_ALLERGY>",
+      "field": "items[0].drug_code",
+      "field_value": "DRUG_AMOX",
+      "family": "allergy",
+      "rule_id": "R-ALG-A-PENICILLIN-DIRECT",
+      "rule_version": "A-PENICILLIN/DRUG_AMOX/direct",
+      "hit_explanation": "过敏冲突（直接命中）：penicillin ↔ DRUG_AMOX；青霉素过敏者使用头孢类须皮试或换药；家族交叉风险",
+      "evidence": "<ALLERGY_DB:A-PENICILLIN/DRUG_AMOX/direct>",
+      "severity": "high",
+      "source": "rule_engine",
+      "agent_id": "rx_field_allergy",
+      "created_at": "2026-08-20T08:24:01+00:00"
+    }
+  ]
+}

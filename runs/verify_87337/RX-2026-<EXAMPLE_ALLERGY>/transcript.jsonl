@@ -1,0 +1,12 @@
+{"event":"input_received","ts":"2026-08-20T08:24:01+00:00","family":null,"agent_id":null,"payload":{"items_count":1,"diagnoses_count":1,"allergies_count":1}}
+{"event":"state_change","ts":"2026-08-20T08:24:01+00:00","family":null,"agent_id":null,"payload":{"actor":"rxchk.check","reason":"input parsed; field agents registered"}}
+{"event":"state_change","ts":"2026-08-20T08:24:01+00:00","family":null,"agent_id":null,"payload":{"actor":"rxchk.check","reason":"8 field agents dispatched"}}
+{"event":"agent_finish","ts":"2026-08-20T08:24:01+00:00","family":"drug","agent_id":"rx_field_drug","payload":{"count":0,"rule_versions":["v2026.08"]}}
+{"event":"agent_finish","ts":"2026-08-20T08:24:01+00:00","family":"dose","agent_id":"rx_field_dose","payload":{"count":0,"rule_versions":["v2026.08"]}}
+{"event":"agent_finish","ts":"2026-08-20T08:24:01+00:00","family":"frequency","agent_id":"rx_field_frequency","payload":{"count":0,"rule_versions":["v2026.08"]}}
+{"event":"agent_finish","ts":"2026-08-20T08:24:01+00:00","family":"route","agent_id":"rx_field_route","payload":{"count":0,"rule_versions":["v2026.08"]}}
+{"event":"agent_finish","ts":"2026-08-20T08:24:01+00:00","family":"indication","agent_id":"rx_field_indication","payload":{"count":0,"rule_versions":["v2026.08"]}}
+{"event":"agent_finish","ts":"2026-08-20T08:24:01+00:00","family":"allergy","agent_id":"rx_field_allergy","payload":{"count":1,"rule_versions":["v2026.08"]}}
+{"event":"agent_finish","ts":"2026-08-20T08:24:01+00:00","family":"interaction","agent_id":"rx_field_interaction","payload":{"count":0,"rule_versions":["v2026.08"]}}
+{"event":"agent_finish","ts":"2026-08-20T08:24:01+00:00","family":"population","agent_id":"rx_field_population","payload":{"count":0,"rule_versions":["v2026.08"]}}
+{"event":"state_change","ts":"2026-08-20T08:24:01+00:00","family":null,"agent_id":null,"payload":{"actor":"rxchk.check","to":"awaiting_review","summary":{"total":9,"running":0,"waiting":0,"completed":9,"failed":0,"crashed":0,"stopped":0},"failed_agents":{}}}

@@ -1,0 +1,18 @@
+{
+  "prescription_no": "RX-2026-<EXAMPLE_ALLERGY>",
+  "status": "awaiting_review",
+  "created_at": "2026-08-20T08:24:01+00:00",
+  "updated_at": "2026-08-20T08:24:01+00:00",
+  "findings_count": 1,
+  "graph": "/Users/kamini/Desktop/RUN/Agent-GIT-CLAUDE-gpt/projects/round_114_20260820_122401/rx-field-check/runs/verify_87337/RX-2026-<EXAMPLE_ALLERGY>/graph.json",
+  "agent_ids": [
+    "rx_field_drug",
+    "rx_field_dose",
+    "rx_field_frequency",
+    "rx_field_route",
+    "rx_field_indication",
+    "rx_field_allergy",
+    "rx_field_interaction",
+    "rx_field_population"
+  ]
+}

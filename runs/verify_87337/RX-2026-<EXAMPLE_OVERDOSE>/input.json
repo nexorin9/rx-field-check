@@ -1,0 +1,33 @@
+{
+  "prescription_no": "RX-2026-<EXAMPLE_OVERDOSE>",
+  "patient_id": "<EXAMPLE_PATIENT_OVERDOSE>",
+  "visit_no": "<EXAMPLE_VISIT_OVERDOSE>",
+  "doctor_id": "<EXAMPLE_DOCTOR_OVERDOSE>",
+  "items": [
+    {
+      "drug_code": "DRUG_AMOX",
+      "dose": "1g",
+      "frequency": "tid",
+      "route": "po",
+      "duration_days": 5
+    },
+    {
+      "drug_code": "DRUG_WAR",
+      "dose": "10mg",
+      "frequency": "qd",
+      "route": "po",
+      "duration_days": 30
+    }
+  ],
+  "diagnoses": [
+    {
+      "code": "J18.900",
+      "name": "支气管肺炎"
+    },
+    {
+      "code": "I48.000",
+      "name": "心房颤动"
+    }
+  ],
+  "allergies": []
+}

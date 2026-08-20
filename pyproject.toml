@@ -1,0 +1,28 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "rx-field-check"
+version = "0.1.0"
+description = "用药处方字段对照校验系统：一张处方派生 8 个字段族核对 Agent 并行查规则/字典/配伍/过敏，输出字段证据卡网格供药师确认回写"
+requires-python = ">=3.10"
+dependencies = [
+    "pyyaml>=6.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.4",
+    "pytest-asyncio>=0.23",
+]
+
+[project.scripts]
+rxchk = "rxchk.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+asyncio_mode = "auto"

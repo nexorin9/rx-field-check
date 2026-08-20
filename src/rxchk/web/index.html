@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>用药处方字段对照校验系统 — 药师工作站</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body data-page="field-check">
+  <header class="topbar">
+    <div class="topbar-title">用药处方字段对照校验系统</div>
+    <div class="topbar-meta" id="topbar-meta">
+      <span class="meta-item">处方号 <code id="rx-no">—</code></span>
+      <span class="meta-item">状态 <span id="rx-status" class="status-pill">—</span></span>
+      <span class="meta-item">核对 <span id="rx-progress">载入中</span></span>
+    </div>
+  </header>
+
+  <section class="runs-bar" id="runs-bar">
+    <label for="run-select">历史处方核对</label>
+    <select id="run-select" aria-label="选择历史处方"></select>
+    <span class="runs-hint" id="runs-hint"></span>
+  </section>
+
+  <main class="layout">
+    <section class="findings-panel" aria-labelledby="findings-title">
+      <h2 id="findings-title">字段证据卡 <small id="findings-count">（载入中…）</small></h2>
+      <p class="panel-desc">每张卡片对应一个字段核对命中；点击卡片由药师确认、放行或驳回。</p>
+      <div class="family-grid" id="family-grid"></div>
+      <p class="empty-state" id="empty-state" hidden>暂无处方核对记录，请在终端执行 <code>rxchk check &lt;rx_no_or_json_path&gt;</code>。</p>
+    </section>
+
+    <section class="transcript-panel" aria-labelledby="transcript-title">
+      <h2 id="transcript-title">核对事件流</h2>
+      <p class="panel-desc">字段 Agent 与处方级状态机的实时事件；与 <code>transcript.jsonl</code> 一致。</p>
+      <ol class="transcript-list" id="transcript-list"></ol>
+    </section>
+
+    <section class="audit-panel" aria-labelledby="audit-title">
+      <h2 id="audit-title">药师操作记录（飞检追溯）</h2>
+      <p class="panel-desc">每次确认 / 备注 / 驳回都会以 append-only 行写入 <code>audit.jsonl</code>。</p>
+      <ol class="audit-list" id="audit-list"></ol>
+    </section>
+  </main>
+
+  <!-- 字段证据卡 → 药师决策模态 -->
+  <div class="modal-mask" id="modal-mask" hidden>
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+      <header class="modal-header">
+        <h3 id="modal-title">字段决策</h3>
+        <button class="modal-close" id="modal-close" type="button" aria-label="关闭">×</button>
+      </header>
+      <div class="modal-body" id="modal-body"></div>
+      <form class="modal-form" id="modal-form">
+        <label for="modal-operator">操作药师（必填）</label>
+        <input id="modal-operator" name="operator" required maxlength="64" autocomplete="off" placeholder="工号 / 姓名">
+
+        <label for="modal-note">备注（确认 / 放行 / 驳回依据）</label>
+        <textarea id="modal-note" name="note" maxlength="2000" rows="4" placeholder="可填写临床判断、引用依据或复核结论"></textarea>
+
+        <div class="modal-actions">
+          <button type="submit" data-action="confirm" class="btn btn-primary">确认</button>
+          <button type="submit" data-action="override" class="btn btn-warning">放行</button>
+          <button type="submit" data-action="reject" class="btn btn-danger">驳回</button>
+          <button type="button" id="modal-cancel" class="btn btn-link">取消</button>
+        </div>
+        <p class="modal-hint" id="modal-hint">操作会写入 audit.jsonl 并推进处方状态；终态后无法再修改。</p>
+      </form>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <span id="connection-state" class="connection-state">●</span>
+    <span class="footer-text">Viewer 字段证据卡 · 轮询间隔 ~1s · token 鉴权已启用</span>
+  </footer>
+
+  <script src="render.js" defer></script>
+  <script src="app.js" defer></script>
+</body>
+</html>

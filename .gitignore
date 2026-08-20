@@ -1,0 +1,48 @@
+# Environment / secrets
+.env
+.env.local
+*.env
+
+# Python runtime / cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+.venv/
+env/
+
+# Test / type / lint caches
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+.tox/
+
+# Build / dist
+build/
+dist/
+*.egg-info/
+*.egg
+target/
+
+# Runtime data / logs
+data/
+logs/
+tmp/
+temp/
+.cache/
+
+# Editor / OS
+.DS_Store
+.idea/
+.vscode/
+*.swp
+*.swo
+*.tmp
+*.log
+
+# Round metadata (must not enter project repo)
+score.json

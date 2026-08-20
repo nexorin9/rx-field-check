@@ -1,0 +1,188 @@
+{
+  "statuses": {
+    "prescription_checker": "completed",
+    "rx_field_drug": "completed",
+    "rx_field_dose": "completed",
+    "rx_field_frequency": "completed",
+    "rx_field_route": "completed",
+    "rx_field_indication": "completed",
+    "rx_field_allergy": "completed",
+    "rx_field_interaction": "completed",
+    "rx_field_population": "completed"
+  },
+  "parent_of": {
+    "prescription_checker": null,
+    "rx_field_drug": "prescription_checker",
+    "rx_field_dose": "prescription_checker",
+    "rx_field_frequency": "prescription_checker",
+    "rx_field_route": "prescription_checker",
+    "rx_field_indication": "prescription_checker",
+    "rx_field_allergy": "prescription_checker",
+    "rx_field_interaction": "prescription_checker",
+    "rx_field_population": "prescription_checker"
+  },
+  "names": {
+    "prescription_checker": "处方核对 RX-2026-<EXAMPLE_ALLERGY>",
+    "rx_field_drug": "drug 字段族核对",
+    "rx_field_dose": "dose 字段族核对",
+    "rx_field_frequency": "frequency 字段族核对",
+    "rx_field_route": "route 字段族核对",
+    "rx_field_indication": "indication 字段族核对",
+    "rx_field_allergy": "allergy 字段族核对",
+    "rx_field_interaction": "interaction 字段族核对",
+    "rx_field_population": "population 字段族核对"
+  },
+  "families": {
+    "prescription_checker": null,
+    "rx_field_drug": "drug",
+    "rx_field_dose": "dose",
+    "rx_field_frequency": "frequency",
+    "rx_field_route": "route",
+    "rx_field_indication": "indication",
+    "rx_field_allergy": "allergy",
+    "rx_field_interaction": "interaction",
+    "rx_field_population": "population"
+  },
+  "metadata": {
+    "prescription_checker": {
+      "task": "RX-2026-<EXAMPLE_ALLERGY>",
+      "family": "",
+      "rule_version": ""
+    },
+    "rx_field_drug": {
+      "task": "",
+      "family": "drug",
+      "rule_version": "v2026.08"
+    },
+    "rx_field_dose": {
+      "task": "",
+      "family": "dose",
+      "rule_version": "v2026.08"
+    },
+    "rx_field_frequency": {
+      "task": "",
+      "family": "frequency",
+      "rule_version": "v2026.08"
+    },
+    "rx_field_route": {
+      "task": "",
+      "family": "route",
+      "rule_version": "v2026.08"
+    },
+    "rx_field_indication": {
+      "task": "",
+      "family": "indication",
+      "rule_version": "v2026.08"
+    },
+    "rx_field_allergy": {
+      "task": "",
+      "family": "allergy",
+      "rule_version": "v2026.08"
+    },
+    "rx_field_interaction": {
+      "task": "",
+      "family": "interaction",
+      "rule_version": "v2026.08"
+    },
+    "rx_field_population": {
+      "task": "",
+      "family": "population",
+      "rule_version": "v2026.08"
+    }
+  },
+  "errors": {},
+  "budget_stopped": false,
+  "interrupts": {},
+  "nodes": [
+    {
+      "agent_id": "prescription_checker",
+      "name": "处方核对 RX-2026-<EXAMPLE_ALLERGY>",
+      "parent_id": null,
+      "status": "completed",
+      "family": null,
+      "error": "",
+      "interrupt_source": "",
+      "interrupt_reason": ""
+    },
+    {
+      "agent_id": "rx_field_drug",
+      "name": "drug 字段族核对",
+      "parent_id": "prescription_checker",
+      "status": "completed",
+      "family": "drug",
+      "error": "",
+      "interrupt_source": "",
+      "interrupt_reason": ""
+    },
+    {
+      "agent_id": "rx_field_dose",
+      "name": "dose 字段族核对",
+      "parent_id": "prescription_checker",
+      "status": "completed",
+      "family": "dose",
+      "error": "",
+      "interrupt_source": "",
+      "interrupt_reason": ""
+    },
+    {
+      "agent_id": "rx_field_frequency",
+      "name": "frequency 字段族核对",
+      "parent_id": "prescription_checker",
+      "status": "completed",
+      "family": "frequency",
+      "error": "",
+      "interrupt_source": "",
+      "interrupt_reason": ""
+    },
+    {
+      "agent_id": "rx_field_route",
+      "name": "route 字段族核对",
+      "parent_id": "prescription_checker",
+      "status": "completed",
+      "family": "route",
+      "error": "",
+      "interrupt_source": "",
+      "interrupt_reason": ""
+    },
+    {
+      "agent_id": "rx_field_indication",
+      "name": "indication 字段族核对",
+      "parent_id": "prescription_checker",
+      "status": "completed",
+      "family": "indication",
+      "error": "",
+      "interrupt_source": "",
+      "interrupt_reason": ""
+    },
+    {
+      "agent_id": "rx_field_allergy",
+      "name": "allergy 字段族核对",
+      "parent_id": "prescription_checker",
+      "status": "completed",
+      "family": "allergy",
+      "error": "",
+      "interrupt_source": "",
+      "interrupt_reason": ""
+    },
+    {
+      "agent_id": "rx_field_interaction",
+      "name": "interaction 字段族核对",
+      "parent_id": "prescription_checker",
+      "status": "completed",
+      "family": "interaction",
+      "error": "",
+      "interrupt_source": "",
+      "interrupt_reason": ""
+    },
+    {
+      "agent_id": "rx_field_population",
+      "name": "population 字段族核对",
+      "parent_id": "prescription_checker",
+      "status": "completed",
+      "family": "population",
+      "error": "",
+      "interrupt_source": "",
+      "interrupt_reason": ""
+    }
+  ]
+}

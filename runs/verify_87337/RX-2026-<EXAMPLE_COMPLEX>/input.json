@@ -1,0 +1,42 @@
+{
+  "prescription_no": "RX-2026-<EXAMPLE_COMPLEX>",
+  "patient_id": "<EXAMPLE_PATIENT_COMPLEX>",
+  "visit_no": "<EXAMPLE_VISIT_COMPLEX>",
+  "doctor_id": "<EXAMPLE_DOCTOR_COMPLEX>",
+  "items": [
+    {
+      "drug_code": "DRUG_ASP",
+      "dose": "0.3g",
+      "frequency": "qd",
+      "route": "po",
+      "duration_days": 90
+    },
+    {
+      "drug_code": "DRUG_IBUP",
+      "dose": "0.4g",
+      "frequency": "bid",
+      "route": "po",
+      "duration_days": 7
+    },
+    {
+      "drug_code": "DRUG_WAR",
+      "dose": "5mg",
+      "frequency": "qd",
+      "route": "po",
+      "duration_days": 90
+    }
+  ],
+  "diagnoses": [
+    {
+      "code": "I25.200",
+      "name": "陈旧性心肌梗死"
+    },
+    {
+      "code": "M79.300",
+      "name": "未特指的肌炎"
+    }
+  ],
+  "allergies": [
+    "aspirin"
+  ]
+}

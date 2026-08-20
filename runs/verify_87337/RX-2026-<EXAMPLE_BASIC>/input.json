@@ -1,0 +1,22 @@
+{
+  "prescription_no": "RX-2026-<EXAMPLE_BASIC>",
+  "patient_id": "<EXAMPLE_PATIENT_BASIC>",
+  "visit_no": "<EXAMPLE_VISIT_BASIC>",
+  "doctor_id": "<EXAMPLE_DOCTOR_BASIC>",
+  "items": [
+    {
+      "drug_code": "DRUG_AMOX",
+      "dose": "0.5g",
+      "frequency": "tid",
+      "route": "po",
+      "duration_days": 7
+    }
+  ],
+  "diagnoses": [
+    {
+      "code": "J18.900",
+      "name": "支气管肺炎"
+    }
+  ],
+  "allergies": []
+}
